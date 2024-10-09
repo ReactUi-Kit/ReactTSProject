@@ -10,7 +10,7 @@ type UserRow = Row & {
 };
 
 const columns: Column<UserRow>[] = [
-  { field: "id", headerName: "ID", width: 70 },
+  { field: "id", headerName: "ID", width: 70, sortable: true },
   { field: "firstName", headerName: "First Name", width: 130 },
   { field: "lastName", headerName: "Last Name", width: 130 },
   { field: "age", headerName: "Age", width: 90 },

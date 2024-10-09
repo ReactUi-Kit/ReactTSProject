@@ -18,6 +18,10 @@ export default function Table<T extends Row>({
 }: TableProps<T>) {
   const [page, setPage] = useState(0);
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
+  const [columnSort, setColumnSort] = useState<{
+    column: keyof T | null;
+    order: "asc" | "desc";
+  }>({ column: "id", order: "asc" });
 
   const totalPages = Math.ceil(rows.length / rowsPerPage);
 
@@ -26,6 +30,31 @@ export default function Table<T extends Row>({
     page * rowsPerPage,
     (page + 1) * rowsPerPage
   );
+
+  const sortedRows = paginatedRows.sort((a, b) => {
+    if (!columnSort.column) return 0;
+    const order = columnSort.order === "asc" ? 1 : -1;
+    const valueA = a[columnSort.column];
+    const valueB = b[columnSort.column];
+    if (valueA < valueB) {
+      return -1 * order;
+    }
+    if (valueA > valueB) {
+      return 1 * order;
+    }
+    return 0;
+  });
+
+  const handleSort = (column: keyof T) => {
+    if (columnSort.column === column) {
+      setColumnSort({
+        column,
+        order: columnSort.order === "asc" ? "desc" : "asc",
+      });
+    } else {
+      setColumnSort({ column, order: "asc" });
+    }
+  };
 
   // handle selected row
   const handleSelectRow = (id: number) => {
@@ -60,6 +89,7 @@ export default function Table<T extends Row>({
               <TableHeaderCell
                 key={String(column.field)}
                 style={{ width: column.width }}
+                onClick={() => column.sortable && handleSort(column.field)}
               >
                 {column.headerName}
               </TableHeaderCell>
@@ -67,7 +97,7 @@ export default function Table<T extends Row>({
           </TableRow>
         </TableHead>
         <tbody>
-          {paginatedRows.map((row) => (
+          {sortedRows.map((row) => (
             <TableRow key={row.id}>
               <TableCell>
                 <input
