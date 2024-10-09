@@ -4,8 +4,7 @@ const Input = styled.input`
   width: 150px;
 `;
 
-const Label = styled.label`
-`;
+const Label = styled.label``;
 
 const InputContainer = styled.div`
   display: flex;
@@ -13,8 +12,4 @@ const InputContainer = styled.div`
   gap: 5px;
 `;
 
-export {
-    Input,
-    Label,
-    InputContainer
-}
+export { Input, Label, InputContainer };
