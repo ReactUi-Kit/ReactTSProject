@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "./Table.style";
 import { Row, TableProps } from "./Table.props";
+import { useSelectedRows } from "./TableContext";
 
 export default function Table<T extends Row>({
   rows,
@@ -17,11 +18,11 @@ export default function Table<T extends Row>({
   ...tableProps
 }: TableProps<T>) {
   const [page, setPage] = useState(0);
-  const [selectedRows, setSelectedRows] = useState<number[]>([]);
   const [columnSort, setColumnSort] = useState<{
     column: keyof T | null;
     order: "asc" | "desc";
   }>({ column: "id", order: "asc" });
+  const { selectedRows, toggleRowSelection } = useSelectedRows();
 
   const totalPages = Math.ceil(rows.length / rowsPerPage);
 
@@ -58,17 +59,19 @@ export default function Table<T extends Row>({
 
   // handle selected row
   const handleSelectRow = (id: number) => {
-    setSelectedRows((prev) =>
-      prev.includes(id) ? prev.filter((rowId) => rowId !== id) : [...prev, id]
-    );
+    toggleRowSelection(rows.find((row) => row.id === id) as Row);
   };
 
   // handle select all rows
   const handleSelectAll = () => {
     if (selectedRows.length === paginatedRows.length) {
-      setSelectedRows([]);
+      paginatedRows.forEach((row) => toggleRowSelection(row));
     } else {
-      setSelectedRows(paginatedRows.map((row) => row.id));
+      paginatedRows.forEach((row) => {
+        if (!selectedRows.includes(row)) {
+          toggleRowSelection(row);
+        }
+      });
     }
   };
 
@@ -102,7 +105,7 @@ export default function Table<T extends Row>({
               <TableCell>
                 <input
                   type="checkbox"
-                  checked={selectedRows.includes(row.id)}
+                  checked={selectedRows.includes(row)}
                   onChange={() => handleSelectRow(row.id)}
                   aria-label={`Select row ${row.id}`}
                 />
