@@ -17,9 +17,6 @@ const Spinner = styled.div<LoaderProps>`
   animation: ${spinAnimation} ${({ speed }) => speed || 2}s linear infinite;
 `;
 
-// Typage des props pour la barre de progression
-
-
 // Styled component pour la barre de progression
 const ProgressBarWrapper = styled.div<LoaderProps>`
   width: 100%;
