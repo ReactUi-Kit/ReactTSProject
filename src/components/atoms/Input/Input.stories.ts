@@ -14,5 +14,7 @@ export const InputStory: Story = {
     label: "Input",
     type: "text",
     placeholder: "Type here",
+    minString:10,
+    maxString:15
   },
 };
