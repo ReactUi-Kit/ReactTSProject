@@ -1,7 +1,7 @@
 import React from "react";
 import { CheckboxProps } from "./Checkbox.props";
 
-export default function Checkbox({ label, options, multiple = true, ...CheckboxProps }: CheckboxProps) {
+export default function Checkbox({ label, options, multiple = true, ...checkboxProps }: CheckboxProps) {
   if (multiple) {
     // Si `multiple` est vrai, on rend des checkboxes
     return (
@@ -13,7 +13,7 @@ export default function Checkbox({ label, options, multiple = true, ...CheckboxP
               type="checkbox"
               id={option.value}
               value={option.value}
-              {...(CheckboxProps)}            />
+              {...(checkboxProps)}            />
             <label htmlFor={option.value}>{option.label}</label>
           </div>
         ))}

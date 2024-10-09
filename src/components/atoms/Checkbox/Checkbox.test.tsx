@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect'; // Pour les assertions supplémentaires comme 'toBeChecked'
 import Checkbox from './Checkbox'; 
 
 describe('Select component with checkboxes', () => {
