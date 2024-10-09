@@ -1,6 +1,7 @@
 import Table from "./Table";
 import { Column, Row, TableProps } from "./Table.props";
 import { StoryObj } from "@storybook/react";
+import { SelectedRowsProvider } from "./TableContext";
 
 type UserRow = Row & {
   firstName: string | null;
@@ -61,8 +62,8 @@ export const TableStory: Story = {
 
 function TableProviderWrapper(props: TableProps<Row>) {
   return (
-    <div>
+    <SelectedRowsProvider>
       <Table {...props} />
-    </div>
+    </SelectedRowsProvider>
   );
 }
