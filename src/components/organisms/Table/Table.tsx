@@ -89,7 +89,6 @@ export default function Table<T extends Row>({
               <TableHeaderCell
                 key={String(column.field)}
                 style={{ width: column.width }}
-                id={`${String(column.field)}-table-header`}
                 onClick={() => column.sortable && handleSort(column.field)}
               >
                 {column.headerName}
