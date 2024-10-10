@@ -6,30 +6,9 @@ type Story = StoryObj<typeof Carousel>;
 export default { component: Carousel };
 
 const carouselItems = [
-  <img
-    src="https://via.placeholder.com/300x200/FF5733/FFFFFF?text=Image+1"
-    alt="Description 1"
-    style={{
-      width: "100%",
-      maxHeight: "200px",
-    }}
-  />,
-  <img
-    src="https://via.placeholder.com/300x200/33FF57/FFFFFF?text=Image+2"
-    alt="Description 2"
-    style={{
-      width: "100%",
-      maxHeight: "200px",
-    }}
-  />,
-  <img
-    src="https://via.placeholder.com/300x200/3357FF/FFFFFF?text=Image+3"
-    alt="Description 3"
-    style={{
-      width: "100%",
-      maxHeight: "200px",
-    }}
-  />,
+  <div key="1" style={{ backgroundColor: "red", height: "200px" }} />,
+  <div key="2" style={{ backgroundColor: "blue", height: "200px" }} />,
+  <div key="3" style={{ backgroundColor: "green", height: "200px" }} />,
 ];
 
 export const DefaultCarousel: Story = {
@@ -37,9 +16,12 @@ export const DefaultCarousel: Story = {
     items: carouselItems,
     options: {
       showArrows: true,
-      autoPlay: true,
+      autoPlay: false,
       interval: 3000,
       fullWidth: false,
+      freeMode: true,
+      showPagination: true,
+      loop: true,
     },
   },
   render: (args) => {

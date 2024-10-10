@@ -3,17 +3,20 @@ import Carousel from "./Carousel";
 import { CarouselProps } from "./Carousel.props";
 
 const carouselItems = [
-  <img
-    src="https://via.placeholder.com/300x200/FF5733/FFFFFF?text=Image+1"
-    alt="Description 1"
+  <div
+    key="1"
+    data-testid="carousel-item"
+    style={{ backgroundColor: "red", height: "200px" }}
   />,
-  <img
-    src="https://via.placeholder.com/300x200/33FF57/FFFFFF?text=Image+2"
-    alt="Description 2"
+  <div
+    key="2"
+    data-testid="carousel-item"
+    style={{ backgroundColor: "blue", height: "200px" }}
   />,
-  <img
-    src="https://via.placeholder.com/300x200/3357FF/FFFFFF?text=Image+3"
-    alt="Description 3"
+  <div
+    key="3"
+    data-testid="carousel-item"
+    style={{ backgroundColor: "green", height: "200px" }}
   />,
 ];
 
@@ -26,9 +29,8 @@ describe("Carousel Component", () => {
   test("renders carousel with provided items", () => {
     render(<Carousel {...defaultProps} />);
 
-    const images = screen.getAllByRole("img");
-    expect(images).toHaveLength(3);
-    expect(images[0]).toHaveAccessibleName("Description 1");
+    const items = screen.getAllByTestId("carousel-item");
+    expect(items).toHaveLength(3);
   });
 
   test("arrows are displayed when showArrows is true", () => {
@@ -62,8 +64,8 @@ describe("Carousel Component", () => {
     const nextButton = screen.getByLabelText("Next Item");
     fireEvent.click(nextButton);
 
-    const images = screen.getAllByRole("img");
-    expect(images[1]).toBeInTheDocument();
+    const items = screen.getAllByTestId("carousel-item");
+    expect(items[1]).toBeInTheDocument();
   });
 
   test("moves to previous slide when previous arrow is clicked", () => {
@@ -72,8 +74,8 @@ describe("Carousel Component", () => {
     const prevButton = screen.getByLabelText("Previous Item");
     fireEvent.click(prevButton);
 
-    const images = screen.getAllByRole("img");
-    expect(images[2]).toBeInTheDocument();
+    const items = screen.getAllByTestId("carousel-item");
+    expect(items[2]).toBeInTheDocument();
   });
 
   test("keyboard navigation works with arrow keys", () => {
@@ -84,11 +86,11 @@ describe("Carousel Component", () => {
     });
     fireEvent.keyDown(carouselContainer, { key: "ArrowRight" });
 
-    const images = screen.getAllByRole("img");
-    expect(images[1]).toBeInTheDocument();
+    const items = screen.getAllByTestId("carousel-item");
+    expect(items[1]).toBeInTheDocument();
 
     fireEvent.keyDown(carouselContainer, { key: "ArrowLeft" });
-    expect(images[0]).toBeInTheDocument();
+    expect(items[0]).toBeInTheDocument();
   });
 
   test("auto play moves to the next slide after interval", () => {
@@ -100,15 +102,14 @@ describe("Carousel Component", () => {
       />
     );
 
-    const images = screen.getAllByRole("img");
-    expect(images[0]).toBeInTheDocument();
+    const items = screen.getAllByTestId("carousel-item");
+    expect(items[0]).toBeInTheDocument();
 
     jest.advanceTimersByTime(2000);
-
-    expect(images[1]).toBeInTheDocument();
+    expect(items[1]).toBeInTheDocument();
 
     jest.advanceTimersByTime(2000);
-    expect(images[2]).toBeInTheDocument();
+    expect(items[2]).toBeInTheDocument();
 
     jest.useRealTimers();
   });
@@ -125,5 +126,60 @@ describe("Carousel Component", () => {
       name: "Image Carousel",
     });
     expect(carouselContainer).toHaveStyle("width: 100%");
+  });
+
+  test("pagination dots are rendered when showPagination is true", () => {
+    render(<Carousel {...defaultProps} />);
+
+    const paginationDots = screen.getAllByRole("button");
+    expect(paginationDots).toHaveLength(3); // Should match the number of items
+  });
+
+  test("clicking on a pagination dot updates the current slide", () => {
+    render(<Carousel {...defaultProps} />);
+
+    const paginationDots = screen.getAllByRole("button");
+
+    // Click on the second pagination dot (index 1)
+    fireEvent.click(paginationDots[1]);
+
+    const items = screen.getAllByTestId("carousel-item");
+
+    // The second item should be in the document
+    expect(items[1]).toBeInTheDocument();
+
+    // Verify that the active dot reflects the current index
+    expect(paginationDots[1]).toHaveAttribute("aria-current", "true");
+
+    // Click on the third pagination dot (index 2)
+    fireEvent.click(paginationDots[2]);
+
+    // The third item should be in the document
+    expect(items[2]).toBeInTheDocument();
+
+    // Verify that the active dot reflects the current index
+    expect(paginationDots[2]).toHaveAttribute("aria-current", "true");
+  });
+
+  test("active pagination dot updates correctly when moving slides", () => {
+    render(<Carousel {...defaultProps} />);
+
+    const paginationDots = screen.getAllByRole("button");
+
+    // Initially, the first dot should be active
+    expect(paginationDots[0]).toHaveAttribute("aria-current", "true");
+
+    // Click next to move to the second item
+    const nextButton = screen.getByLabelText("Next Item");
+    fireEvent.click(nextButton);
+
+    // Now the second dot should be active
+    expect(paginationDots[1]).toHaveAttribute("aria-current", "true");
+
+    // Click next again to move to the third item
+    fireEvent.click(nextButton);
+
+    // Now the third dot should be active
+    expect(paginationDots[2]).toHaveAttribute("aria-current", "true");
   });
 });
