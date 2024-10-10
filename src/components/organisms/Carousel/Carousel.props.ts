@@ -3,6 +3,9 @@ export type CarouselOptions = {
   autoPlay?: boolean;
   interval?: number;
   fullWidth?: boolean;
+  freeMode?: boolean;
+  showPagination?: boolean;
+  loop?: boolean;
 };
 
 export type CarouselProps = {
