@@ -3,7 +3,7 @@ import { Tab, TabList, TabPanel, TabsContainer } from "./Tabs.style";
 import { TabsProps } from "./Tabs.props";
 
 /**
- * Modal renders a tabs to switch between different content.
+ * Tabs renders a tabs to switch between different content.
  *
  * @param {TabProps} tabs - An array of tabs with a label and children.
  */

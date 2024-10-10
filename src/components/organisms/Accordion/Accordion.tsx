@@ -8,6 +8,11 @@ import {
   AccordionContent,
 } from "./Accordion.style";
 
+/**
+ * Accordion renders a list of items that can be expanded or collapsed.
+ *
+ * @param {AccordionItem} items - An array of objects containing the title and content of each accordion item.
+ */
 export default function Accordion({ items }: AccordionProps) {
   const [openIndices, setOpenIndices] = useState<number[]>([]);
   const [maxHeights, setMaxHeights] = useState<number[]>([]);

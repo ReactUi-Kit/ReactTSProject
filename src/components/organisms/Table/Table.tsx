@@ -11,6 +11,13 @@ import {
 import { Row, TableProps } from "./Table.props";
 import { useSelectedRows } from "./TableContext";
 
+/**
+ * Table renders a list of items in a tabular format.
+ *
+ * @param {Row[]} rows - An array of objects containing the data to be displayed in the table.
+ * @param {Column[]} columns - An array of objects containing the configuration for each column in the table.
+ * @param {number} rowsPerPage - The number of rows to display per page.
+ */
 export default function Table<T extends Row>({
   rows,
   columns,
