@@ -1,17 +1,18 @@
 import React from "react";
 import { SelectProps } from "./Select.props";
+import { SelectWrapper, Label, StyledSelect } from "./Select.style";
 
 export default function Select({ label, options, multiple = false, ...selectProps }: SelectProps) {
   return (
-    <div>
-      <label>{label}</label>
-      <select multiple={multiple} {...selectProps}>
+    <SelectWrapper>
+      {label && <Label>{label}</Label>}
+      <StyledSelect multiple={multiple} {...selectProps}>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
-      </select>
-    </div>
+      </StyledSelect>
+    </SelectWrapper>
   );
 }
