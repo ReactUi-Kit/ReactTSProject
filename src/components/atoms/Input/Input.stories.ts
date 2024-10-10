@@ -13,16 +13,8 @@ export const InputStory: Story = {
   args: {
     label: "Input",
     type: "text",
-    min: 10,
-    max: 15,
-    disabled:true,
-    className:``,
-    name:'inputName',
-    pattern: '',
-    required:false,
-    readOnly:false,
-    labelClassName:``,
-    containerClassName:``
+    placeholder: "Type here",
+    minString:10,
+    maxString:15
   },
 };
-
