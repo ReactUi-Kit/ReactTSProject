@@ -14,5 +14,6 @@ export const InputStory: Story = {
     label: "Input",
     type: "text",
     placeholder: "Type here",
+    disabled: false,
   },
 };
