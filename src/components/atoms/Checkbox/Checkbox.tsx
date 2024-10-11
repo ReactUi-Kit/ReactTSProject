@@ -1,9 +1,14 @@
 import React from "react";
 import { CheckboxProps } from "./Checkbox.props";
+import * as Styled from "./Checkbox.style"
 
-export default function Checkbox({ label, options, ...checkboxProps }: CheckboxProps) {
+export default function Checkbox({ label, options, textColor, textSize, width, ...checkboxProps }: CheckboxProps) {
   return (
-    <div>
+    <Styled.Checkbox
+      textColor={textColor}
+      textSize={textSize}
+      width={width}
+    >
       <label>{label}</label>
       {options.map((option) => (
         <div key={option.value}>
@@ -15,6 +20,6 @@ export default function Checkbox({ label, options, ...checkboxProps }: CheckboxP
           <label htmlFor={option.value}>{option.label}</label>
         </div>
       ))}
-    </div>
+    </Styled.Checkbox>
   );
 }

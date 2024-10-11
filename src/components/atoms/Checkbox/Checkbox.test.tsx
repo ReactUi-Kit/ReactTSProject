@@ -10,7 +10,7 @@ describe('Select component with checkboxes', () => {
   ];
 
   it('renders the checkboxes and label', () => {
-    render(<Checkbox label="Select options" options={options} multiple={true} />);
+    render(<Checkbox label="Select options" options={options} multiple={true} textColor="black" textSize="16px" width="auto" />);
 
     // Vérifier que le label est bien affiché
     expect(screen.getByText('Select options')).toBeInTheDocument();
@@ -24,7 +24,7 @@ describe('Select component with checkboxes', () => {
   });
 
   it('allows checking and unchecking the checkboxes', () => {
-    render(<Checkbox label="Select options" options={options} multiple={true} />);
+    render(<Checkbox label="Select options" options={options} multiple={true} textColor="black" textSize="16px" width="auto" />);
 
     // Simuler un clic pour cocher/décocher
     const option1Checkbox = screen.getByLabelText('Option 1');
