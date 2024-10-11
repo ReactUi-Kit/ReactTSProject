@@ -1,4 +1,3 @@
-// src/components/atoms/Toggle/Toggle.props.ts
 import { ComponentProps } from "react";
 
 export type ToggleProps = {

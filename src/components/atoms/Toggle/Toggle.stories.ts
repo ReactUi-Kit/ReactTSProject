@@ -1,4 +1,3 @@
-// src/components/atoms/Toggle/Toggle.stories.ts
 import type { Meta, StoryObj } from "@storybook/react";
 import Toggle from "./Toggle";
 
@@ -13,12 +12,5 @@ export const OnToggle: Story = {
   args: {
     label: "Toggle On",
     checked: true,
-  },
-};
-
-export const OffToggle: Story = {
-  args: {
-    label: "Toggle Off",
-    checked: false,
   },
 };
