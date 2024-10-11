@@ -43,16 +43,19 @@ export const Slider = styled.span`
   }
 `;
 
-export const HiddenCheckbox = styled.input`
-  opacity: 0;
-  width: 0;
-  height: 0;
+export const HiddenCheckbox = styled.input<{
+  color?: string;
+}>`
+  ${({ color }) => `
+    opacity: 0;
+    width: 0;
+    height: 0;
+      &:checked + ${Slider} {
+      background-color: ${color ?? "#4caf50"};
+    }
 
-  &:checked + ${Slider} {
-    background-color: #4caf50;
-  }
-
-  &:checked + ${Slider}::before {
-    transform: translateX(26px);
-  }
+    &:checked + ${Slider}::before {
+      transform: translateX(26px);
+    }
+  `};
 `;

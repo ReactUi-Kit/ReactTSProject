@@ -11,6 +11,7 @@ type Story = StoryObj<typeof Toggle>;
 export const OnToggle: Story = {
   args: {
     label: "Toggle On",
-    checked: true,
+    disabled: true,
+    backgroundColor: "#4caf50",
   },
 };
