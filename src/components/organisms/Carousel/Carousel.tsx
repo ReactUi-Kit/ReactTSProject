@@ -177,6 +177,9 @@ export default function Carousel({ items, options }: CarouselProps) {
               key={index}
               active={currentIndex === (loop ? index + 1 : index)}
               onClick={() => handlePaginationClick(index)}
+              aria-current={
+                currentIndex === (loop ? index + 1 : index) ? "true" : "false"
+              }
             />
           ))}
         </PaginationContainer>

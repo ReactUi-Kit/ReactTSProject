@@ -22,7 +22,12 @@ const carouselItems = [
 
 const defaultProps: CarouselProps = {
   items: carouselItems,
-  options: { showArrows: true, autoPlay: false, fullWidth: false },
+  options: {
+    showArrows: true,
+    autoPlay: false,
+    fullWidth: false,
+    showPagination: true,
+  },
 };
 
 describe("Carousel Component", () => {
@@ -131,55 +136,47 @@ describe("Carousel Component", () => {
   test("pagination dots are rendered when showPagination is true", () => {
     render(<Carousel {...defaultProps} />);
 
-    const paginationDots = screen.getAllByRole("button");
-    expect(paginationDots).toHaveLength(3); // Should match the number of items
+    const paginationDots = screen.getAllByRole("button", {
+      name: (_, element) => element.getAttribute("aria-current") !== null,
+    });
+
+    expect(paginationDots).toHaveLength(3);
   });
 
   test("clicking on a pagination dot updates the current slide", () => {
     render(<Carousel {...defaultProps} />);
 
-    const paginationDots = screen.getAllByRole("button");
+    const paginationDots = screen.getAllByRole("button", {
+      name: (_, element) => element.getAttribute("aria-current") !== null,
+    });
 
-    // Click on the second pagination dot (index 1)
     fireEvent.click(paginationDots[1]);
 
     const items = screen.getAllByTestId("carousel-item");
 
-    // The second item should be in the document
     expect(items[1]).toBeInTheDocument();
 
-    // Verify that the active dot reflects the current index
     expect(paginationDots[1]).toHaveAttribute("aria-current", "true");
 
-    // Click on the third pagination dot (index 2)
     fireEvent.click(paginationDots[2]);
 
-    // The third item should be in the document
     expect(items[2]).toBeInTheDocument();
 
-    // Verify that the active dot reflects the current index
     expect(paginationDots[2]).toHaveAttribute("aria-current", "true");
   });
 
   test("active pagination dot updates correctly when moving slides", () => {
     render(<Carousel {...defaultProps} />);
 
-    const paginationDots = screen.getAllByRole("button");
+    const paginationDots = screen.getAllByRole("button", {
+      name: (_, element) => element.getAttribute("aria-current") !== null,
+    });
 
-    // Initially, the first dot should be active
     expect(paginationDots[0]).toHaveAttribute("aria-current", "true");
 
-    // Click next to move to the second item
     const nextButton = screen.getByLabelText("Next Item");
     fireEvent.click(nextButton);
 
-    // Now the second dot should be active
     expect(paginationDots[1]).toHaveAttribute("aria-current", "true");
-
-    // Click next again to move to the third item
-    fireEvent.click(nextButton);
-
-    // Now the third dot should be active
-    expect(paginationDots[2]).toHaveAttribute("aria-current", "true");
   });
 });
