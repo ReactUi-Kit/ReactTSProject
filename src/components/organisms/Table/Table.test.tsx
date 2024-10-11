@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Table from "./Table";
 import { Column, Row } from "./Table.props";
+import { SelectedRowsProvider } from "./TableContext";
 
 type UserRow = Row & {
   firstName: string | null;
@@ -36,9 +37,17 @@ const rows: UserRow[] = [
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ];
 
+const TableTestWrapper: React.FC = () => {
+  return (
+    <SelectedRowsProvider>
+      <Table rows={rows} columns={columns} rowsPerPage={5} />
+    </SelectedRowsProvider>
+  );
+};
+
 describe("Table Component", () => {
   test("renders the table with correct columns and rows", () => {
-    render(<Table rows={rows} columns={columns} rowsPerPage={5} />);
+    render(<TableTestWrapper />);
 
     expect(screen.getByText("ID")).toBeInTheDocument();
     expect(screen.getByText("First Name")).toBeInTheDocument();
@@ -52,7 +61,7 @@ describe("Table Component", () => {
   });
 
   test("renders the pagination buttons", () => {
-    render(<Table rows={rows} columns={columns} rowsPerPage={5} />);
+    render(<TableTestWrapper />);
 
     const nextButton = screen.getByLabelText("Next page");
     const prevButton = screen.getByLabelText("Previous page");
@@ -67,7 +76,7 @@ describe("Table Component", () => {
   });
 
   test("handles row selection with checkboxes", () => {
-    render(<Table rows={rows} columns={columns} rowsPerPage={5} />);
+    render(<TableTestWrapper />);
 
     const firstCheckbox = screen.getAllByRole("checkbox")[1];
     fireEvent.click(firstCheckbox);
@@ -79,7 +88,7 @@ describe("Table Component", () => {
   });
 
   test("renders custom value from valueGetter", () => {
-    render(<Table rows={rows} columns={columns} rowsPerPage={5} />);
+    render(<TableTestWrapper />);
 
     expect(screen.getByText("Jon Snow")).toBeInTheDocument();
     expect(screen.getByText("Cersei Lannister")).toBeInTheDocument();

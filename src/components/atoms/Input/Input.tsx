@@ -33,7 +33,7 @@ export default function Input(props: InputProps) {
   return (
     <Style.InputContainer className={containerClassName}>
       {label && (
-        <Style.Label htmlFor={props.name} className={labelClassName}>
+        <Style.Label htmlFor={inputProps.name} className={labelClassName}>
           {label}
         </Style.Label>
       )}
