@@ -1,7 +1,7 @@
 import React from "react";
 import { CheckboxProps } from "./Checkbox.props";
 
-export default function Select({ label, options, multiple = true, ...CheckboxProps }: CheckboxProps) {
+export default function Checkbox({ label, options, multiple = true, ...CheckboxProps }: CheckboxProps) {
   if (multiple) {
     // Si `multiple` est vrai, on rend des checkboxes
     return (
