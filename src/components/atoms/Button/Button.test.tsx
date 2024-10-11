@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import Button from "./Button";
 import "@testing-library/jest-dom";
-import { ButtonProps } from "./Button.props";
+import { ButtonProps, ButtonVariant } from "./Button.props";
 
 describe("Button component", () => {
   const buttonLabel = "Click Me";
@@ -35,5 +35,26 @@ describe("Button component", () => {
     expect(screen.getByText("LeftIcon")).toBeInTheDocument();
     expect(screen.getByText("RightIcon")).toBeInTheDocument();
     expect(screen.getByText(buttonLabel)).toBeInTheDocument();
+  });
+
+  it("applies the primary variant background color", () => {
+    renderButton({ label: buttonLabel, variant: ButtonVariant.Primary });
+    const button = screen.getByText(buttonLabel);
+    const style = window.getComputedStyle(button);
+    expect(style.backgroundColor).toBe("rgb(0, 86, 179)");
+  });
+
+  it("applies the secondary variant background color", () => {
+    renderButton({ label: buttonLabel, variant: ButtonVariant.Secondary });
+    const button = screen.getByText(buttonLabel);
+    const style = window.getComputedStyle(button);
+    expect(style.backgroundColor).toBe("rgb(90, 98, 104)");
+  });
+
+  it("applies the danger variant background color", () => {
+    renderButton({ label: buttonLabel, variant: ButtonVariant.Danger });
+    const button = screen.getByText(buttonLabel);
+    const style = window.getComputedStyle(button);
+    expect(style.backgroundColor).toBe("rgb(200, 35, 51)");
   });
 });
