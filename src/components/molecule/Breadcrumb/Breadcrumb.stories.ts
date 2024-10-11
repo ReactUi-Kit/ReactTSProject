@@ -17,7 +17,7 @@ export const BreadcrumbStory: Story = {
     ],
     backgroundColor: '#f0f0f0',
     textColor: '#000000',
-    barSize: '100%', 
+    barSize: 'auto', 
     textSize: '16px',
   },
 }; 

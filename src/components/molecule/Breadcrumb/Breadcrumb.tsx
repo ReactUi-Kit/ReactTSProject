@@ -1,28 +1,35 @@
 import React from "react";
 import { BreadcrumbProps } from "./Breadcrumb.props";
+import { SlArrowRight } from "react-icons/sl";
+import * as Styled from "./Breadcrumb.style"
 
 export default function Breadcrumb  ({ options, backgroundColor, textColor, barSize, textSize, ...BreadcrumbProps }: BreadcrumbProps) {
   return (
-    <div
-    className="breadcrumb-wrapper"
-    style={{ backgroundColor, width: barSize }}
-    {...BreadcrumbProps}
+    <Styled.Wrapper
+    backgroundColor={backgroundColor}
+    barSize={barSize}
   >
     {options.map((item, index) => (
-      <span
+      <>
+      <Styled.Item
         key={index}
-        className="breadcrumb-item"
-        style={{ fontSize: textSize }}
+        textSize= {textSize}
+        backgroundColor={backgroundColor}
       >
-        <a
+        <Styled.CustomLink 
           href={item.link}
-          className="breadcrumb-link"
-          style={{ color: textColor }}
+          textColor={textColor}
         >
           {item.label}
-        </a>
-      </span>
+        </Styled.CustomLink>
+      </Styled.Item>
+      { options.length-1 !== index && 
+        <SlArrowRight />
+      
+      }
+      </>
+      
     ))}
-  </div>
+  </Styled.Wrapper>
   );
 };
