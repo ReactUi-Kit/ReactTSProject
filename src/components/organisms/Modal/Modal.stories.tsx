@@ -3,6 +3,7 @@ import Modal from "./Modal";
 import { ModalProvider, useModal } from "./ModalContext";
 import { StoryObj } from "@storybook/react/*";
 import { ModalProps } from "./Modal.props";
+import Button from "../../atoms/Button/Button";
 
 type Story = StoryObj<typeof Modal>;
 
@@ -32,7 +33,7 @@ function ModalProviderWrapper(props: ModalProps) {
 
   return (
     <div>
-      <button onClick={toggleModal}>Toggle Modal</button>
+      <Button onClick={toggleModal} label="Toggle Modal" />
       <Modal {...props}>
         <p>Modal content</p>
       </Modal>
