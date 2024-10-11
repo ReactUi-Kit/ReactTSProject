@@ -16,5 +16,8 @@ export const RadioStory: Story = {
       { label: "Option 2", value: "option2" },
       { label: "Option 3", value: "option3" },
     ],
+    textColor: '#000000',
+    textSize: '16px',
+    width: 'auto'
   },
 };
