@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Button,
   PaginationWrapper,
   StyledTable,
   TableCell,
@@ -10,6 +9,7 @@ import {
 } from "./Table.style";
 import { Row, TableProps } from "./Table.props";
 import { useSelectedRows } from "./TableContext";
+import Button from "../../atoms/Button/Button";
 
 /**
  * Table renders a list of items in a tabular format.
@@ -133,9 +133,8 @@ export default function Table<T extends Row>({
           onClick={() => setPage(page - 1)}
           disabled={page === 0}
           aria-label="Previous page"
-        >
-          Previous
-        </Button>
+          label="Previous"
+        />
         <span>
           Page {page + 1} of {totalPages}
         </span>
@@ -143,9 +142,8 @@ export default function Table<T extends Row>({
           onClick={() => setPage(page + 1)}
           disabled={page + 1 === totalPages}
           aria-label="Next page"
-        >
-          Next
-        </Button>
+          label="Next"
+        />
       </PaginationWrapper>
     </>
   );
