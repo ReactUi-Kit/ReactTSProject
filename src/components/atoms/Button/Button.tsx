@@ -1,4 +1,4 @@
-import { ButtonProps } from "./Button.props";
+import { ButtonProps, ButtonVariant } from "./Button.props";
 import { StyledButton } from "./Button.style";
 
 /**
@@ -11,10 +11,15 @@ import { StyledButton } from "./Button.style";
  * @param {ButtonVariant} variant - The variant of the button.
  */
 export default function Button(props: ButtonProps) {
-  const { label, icons, ...buttonProps } = props;
+  const {
+    label,
+    icons,
+    variant = ButtonVariant.Primary,
+    ...buttonProps
+  } = props;
 
   return (
-    <StyledButton {...buttonProps}>
+    <StyledButton {...buttonProps} variant={variant}>
       {icons?.left && <span className="icon-left">{icons.left}</span>}
       {label}
       {icons?.right && <span className="icon-right">{icons.right}</span>}
