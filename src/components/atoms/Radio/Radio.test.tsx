@@ -10,7 +10,7 @@ describe('Select component with Radio', () => {
   ];
 
   it('renders the Radio and label', () => {
-    render(<Radio label="Select options" options={options} />);
+    render(<Radio label="Select options" options={options} textColor="black" textSize="16px" width="auto" />);
 
     // Vérifier que le label est bien affiché
     expect(screen.getByText('Select options')).toBeInTheDocument();
@@ -24,7 +24,7 @@ describe('Select component with Radio', () => {
   });
 
   it('allows checking and unchecking the radios', () => {
-    render(<Radio label="Select options" options={options} />);
+    render(<Radio label="Select options" options={options} textColor="black" textSize="16px" width="auto" />);
 
     // Simuler un clic pour cocher/décocher
     const option1Radio = screen.getByLabelText('Option 1');

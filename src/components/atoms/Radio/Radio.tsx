@@ -1,9 +1,13 @@
 import React from "react";
 import { RadioProps } from "./Radio.props";
+import * as Styled from "./Radio.style"
 
-export default function Radiobox({ label, options, ...RadioProps }: RadioProps) {
+export default function Radiobox({ label, options, textColor, textSize, width, ...RadioProps }: RadioProps) {
   return (
-    <div>
+    <Styled.Radio
+    textColor={textColor}
+    textSize={textSize}
+    width={width}>
       <label>{label}</label>
       {options.map((option) => (
         <div key={option.value}>
@@ -17,6 +21,6 @@ export default function Radiobox({ label, options, ...RadioProps }: RadioProps) 
           <label htmlFor={option.value}>{option.label}</label>
         </div>
       ))}
-    </div>
+    </Styled.Radio>
   );
 }
